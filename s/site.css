@@ -50,13 +50,18 @@ header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     z-index: 800;
 }
 
 header img {
     width: 350px;
+    max-width: 100%;
+}
+
+header.left {
+    justify-content: flex-start;
 }
 
 header h1 {
@@ -97,12 +102,8 @@ footer .footer-content {
 }
 
 .footer-logos img {
-    height: 100px;
+    height: 255px;
     width: auto;
-}
-
-.footer-logos img:last-child {
-    height: 55px;
 }
 
 footer .footer-content h1 {
@@ -125,8 +126,11 @@ footer .footer-bottom .footer-content {
 
 footer .footer-bottom a,
 footer .footer-bottom a:visited {
-    float: right;
     color: #fff;
+}
+
+footer .footer-bottom > .footer-content > a {
+    float: right;
     margin-left: 13px;
 }
 
@@ -304,6 +308,8 @@ section.form-page small {
     font-size: 16px;
     font-weight: normal;
     cursor: pointer;
+    padding:1px;
+    margin-top:5px;
 }
 
 .radio-group input[type="radio"] {
@@ -414,6 +420,38 @@ section.split h2 {
     border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
+section.split > div > div:first-child {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+section.split > div:first-child > div:first-child {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: 34px;
+}
+
+section.split > div > div:first-child > span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
+    font-weight: 700;
+    background-color: rgba(230, 230, 230, 0.3);
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+section.split > div > div:first-child > h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
 section.split h3 {
     color: #fff;
 }
@@ -492,6 +530,21 @@ ul.cities li::before {
     display: none;
 }
 
+input.error,
+textarea.error,
+select.error {
+    border-color: #dc3545;
+    background-color: #fff5f5;
+}
+
+.error-message {
+    display: block;
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
 @media (max-width: 900px) {
     header {
         flex-direction: column;
@@ -513,17 +566,40 @@ ul.cities li::before {
         font-size: 18px;
     }
 
+    section.form-page h1,
+    section.form-page h2,
+    section.form-page > label {
+        text-align: left;
+    }
+
+    .radio-group {
+        gap: 13px 13px;
+        row-gap: 5px;
+    }
+
     footer .footer-bottom .footer-content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        padding-block: 2.8rem;
     }
 
-    footer .footer-bottom a {
+    footer .footer-bottom > .footer-content > a {
         float: none;
+        display: block;
         margin-left: 0;
         margin-top: 13px;
         margin-bottom: 8px;
+    }
+
+    .footer-logos {
+        width: 100%;
+    }
+
+    .footer-logos img {
+        width: 90%;
+        max-width: 300px;
+        height: auto;
     }
 
     section.split {
@@ -553,7 +629,7 @@ ul.cities li::before {
         margin-bottom: 21px;
     }
 
-    main section:last-child h2 {
+    main section:last-child:not(.form-page) h2 {
         text-align: center;
     }
 
@@ -568,7 +644,7 @@ ul.cities li::before {
     }
 
     .footer-logos img {
-        width: calc(34% - 11px);
+        width: 90%;
         height: auto;
         object-fit: contain;
     }

@@ -1,14 +1,14 @@
-// KOBİ formu - zorunlu alanlar ve hata mesajları
+// Birey formu - zorunlu alanlar ve hata mesajları
 const fields = {
-    name:       { type: 'text',     message: 'Yetkili adı soyadı zorunludur' },
-    email:      { type: 'text',     message: 'E-posta adresi zorunludur', validate: checkEmail, invalidMessage: 'Geçerli bir e-posta adresi giriniz' },
-    phone:      { type: 'text',     message: 'Telefon numarası zorunludur', validate: checkPhone, invalidMessage: 'Geçerli bir telefon numarası giriniz (0 ile başlayan 11 haneli, örn: 05556667788)' },
-    city:       { type: 'radio',    message: 'İşletme ili seçiniz' },
-    experience: { type: 'radio',    message: 'Faaliyet süresi seçiniz' },
-    revenue:    { type: 'text',     message: 'Yıllık ciro zorunludur', validate: checkNumber, invalidMessage: 'Yıllık ciro sadece rakam içermelidir' },
-    trendyol:   { type: 'radio',    message: 'Trendyol mağaza durumu seçiniz' },
-    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' },
-    employment: { type: 'checkbox', message: 'İstihdam taahhüdü zorunludur' }
+    name:        { type: 'text',     message: 'Adınız Soyadınız zorunludur' },
+    birthdate:   { type: 'text',     message: 'Doğum tarihi zorunludur', validate: checkMinAge(18), invalidMessage: 'Başvuru için en az 18 yaşında olmalısınız' },
+    email:       { type: 'text',     message: 'E-posta adresi zorunludur', validate: checkEmail, invalidMessage: 'Geçerli bir e-posta adresi giriniz' },
+    phone:       { type: 'text',     message: 'Telefon numarası zorunludur', validate: checkPhone, invalidMessage: 'Geçerli bir telefon numarası giriniz (0 ile başlayan 11 haneli, örn: 05556667788)' },
+    education:   { type: 'radio',    message: 'Eğitim durumu seçiniz' },
+    employed:    { type: 'radio',    message: 'Çalışma durumu seçiniz' },
+    city:        { type: 'radio',    message: 'İkamet ili seçiniz' },
+    kvkk:        { type: 'checkbox', message: 'KVKK onayı zorunludur' },
+    declaration: { type: 'checkbox', message: 'Taahhüt onayı zorunludur' }
 };
 
 function clearErrors() {
@@ -88,23 +88,6 @@ function validate() {
         }
     }
 
-    // Trendyol profil URL kontrolü (conditional)
-    const trendyolSelected = document.querySelector('input[name="trendyol"]:checked');
-    if (trendyolSelected && trendyolSelected.value === 'evet') {
-        const profileInput = document.querySelector('input[name="trendyolProfile"]');
-        const profileValue = profileInput ? profileInput.value.trim() : '';
-
-        if (profileValue === '') {
-            showError(profileInput, 'Trendyol satıcı profili zorunludur', 'text');
-            errors.push('Trendyol satıcı profili zorunludur');
-            if (!firstError) firstError = profileInput;
-        } else if (!checkUrl(profileValue)) {
-            showError(profileInput, 'Geçerli bir web sitesi URL\'si giriniz (https:// ile başlamalı)', 'text');
-            errors.push('Geçerli bir web sitesi URL\'si giriniz');
-            if (!firstError) firstError = profileInput;
-        }
-    }
-
     if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
@@ -116,12 +99,12 @@ function collectFormData() {
     const data = {};
 
     // Text inputlar
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(input => {
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"]').forEach(input => {
         if (input.name) data[input.name] = input.value.trim();
     });
 
     // Radio grupları
-    ['city', 'experience', 'trendyol'].forEach(name => {
+    ['gender', 'disability', 'education', 'employed', 'city'].forEach(name => {
         const selected = document.querySelector(`input[name="${name}"]:checked`);
         data[name] = selected ? selected.value : null;
     });
@@ -144,22 +127,8 @@ function submitForm() {
     return collectFormData();
 }
 
-// Form submit handler + Trendyol toggle
+// Form submit handler
 document.addEventListener('DOMContentLoaded', function() {
-    // Trendyol profil alanı toggle
-    const trendyolRadios = document.querySelectorAll('input[name="trendyol"]');
-    const profileLabel = document.getElementById('trendyol-profile-label');
-
-    trendyolRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'evet') {
-                profileLabel.classList.remove('hidden');
-            } else {
-                profileLabel.classList.add('hidden');
-            }
-        });
-    });
-
     // Hata temizleme event listener'ları
     for (const [name, field] of Object.entries(fields)) {
         const elements = document.querySelectorAll(`input[name="${name}"]`);
@@ -167,12 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const eventType = field.type === 'text' ? 'input' : 'change';
             el.addEventListener(eventType, () => clearFieldError(el, field.type));
         });
-    }
-
-    // Trendyol profil alanı hata temizleme
-    const profileInput = document.querySelector('input[name="trendyolProfile"]');
-    if (profileInput) {
-        profileInput.addEventListener('input', () => clearFieldError(profileInput, 'text'));
     }
 
     // Form submit

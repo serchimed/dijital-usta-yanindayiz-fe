@@ -11,9 +11,7 @@
 </head>
 
 <body>
-  <header>
-    <a href="./"><img src="./s/logo.png" alt="Dijital Usta" /></a>
-  </header>
+  <header class="left"><a href="./"><img src="./s/logo-header.png" alt="Yanınızdayız" /></a></header>
   <main>
     <section class="form-page">
       <h1>Bireysel Katılımcı Başvuru Formu</h1>
@@ -56,7 +54,7 @@
 
       <label>Eğitim Durumunuz *
         <span class="radio-group">
-          <label><input type="radio" name="education" value="lise" required /> Lise</label>
+          <label><input type="radio" name="education" value="lise" required checked /> Lise</label>
           <label><input type="radio" name="education" value="onlisans" /> Ön Lisans</label>
           <label><input type="radio" name="education" value="lisans" /> Lisans</label>
           <label><input type="radio" name="education" value="yukseklisans" /> Yüksek Lisans/Doktora</label>
@@ -84,7 +82,7 @@
 
       <label class="checkbox-label">
         <input type="checkbox" name="kvkk" required />
-        <span><b>Aydınlatma Metni:</b> KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+        <span><b><a href="https://panel.dijitalusta.net/concent.html" target="_blank">Aydınlatma Metni</a>:</b> KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
       </label>
 
       <label class="checkbox-label">
@@ -103,22 +101,20 @@
           <p>Gençleri e-ticaretle buluşturup<br/>KOBİ'lere yetkin iş gücü kazandırmayı amaçlar.</p>
         </span>
         <div class="footer-logos">
-          <img src="./s/ticaret.png" alt="T.C. Ticaret Bakanlığı" />
-          <img src="./s/tobb.png" alt="TOBB" />
-          <img src="./s/trendyol.png" alt="Trendyol" />
-          <img src="./s/musiad.png" alt="MÜSİAD" />
+          <img src="./s/logo-footer.png" alt="Yanınızdayız" />
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-content">
-        © 2025 Dijital Usta | Tüm Haklar Saklıdır.
+        <span>© 2025 <a href="https://dijitalusta.net">Dijital Usta</a> | Tüm Haklar Saklıdır.</span>
         <a href="https://panel.dijitalusta.net/concent.html">KVKK Aydınlatma Metni ve Açık Rıza Formu</a>
       </div>
     </div>
   </footer>
   <script src="./s/site.js?v=1" defer></script>
-  <script src="./s/code/pages/index.js?v=1" defer></script>
+  <script src="./s/code/helper.js?v=1" defer></script>
+  <script src="./s/code/pages/birey.js?v=1" defer></script>
 </body>
 
 </html>
