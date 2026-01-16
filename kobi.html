@@ -68,7 +68,7 @@
         </span>
       </label>
 
-      <label for="trendyolProfile" id="trendyol-profile-label" style="display: none;">Trendyol Satıcı Profili
+      <label for="trendyolProfile" id="trendyol-profile-label" class="hidden">Trendyol Satıcı Profili
         <input type="text" id="trendyolProfile" name="trendyolProfile" />
       </label>
 
@@ -110,23 +110,7 @@
     </div>
   </footer>
   <script src="./s/site.js?v=1" defer></script>
-  <script src="./s/code/pages/index.js?v=1" defer></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const trendyolRadios = document.querySelectorAll('input[name="trendyol"]');
-      const profileLabel = document.getElementById('trendyol-profile-label');
-
-      trendyolRadios.forEach(function(radio) {
-        radio.addEventListener('change', function() {
-          if (this.value === 'evet') {
-            profileLabel.style.display = 'block';
-          } else {
-            profileLabel.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
+  <script src="./s/code/pages/kobi.js?v=1" defer></script>
 </body>
 
 </html>

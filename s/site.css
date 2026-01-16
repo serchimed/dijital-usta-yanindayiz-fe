@@ -438,8 +438,16 @@ section.split a {
     transition: background-color 0.2s;
 }
 
+section.split > div:first-child .button-row {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: 34px;
+}
+
 section.split > div:first-child a {
     color: #FE5200;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 section.split > div:last-child a {
@@ -477,6 +485,11 @@ ul.cities li::before {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+/* Utility classes */
+.hidden {
+    display: none;
 }
 
 @media (max-width: 900px) {
