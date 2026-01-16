@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bireysel Başvusuru Yap | Yanınızdayız | Dijital Usta</title>
+  <title>Bireysel Katılımcı Başvuru Formu | Dijital Usta - Yanınızdayız</title>
   <link rel="preconnect" href="https://api.dijitalusta.net" />
   <link rel="stylesheet" href="./s/site.css?v=1" />
 <link rel="icon" type="image/x-icon" href="./s/favicon.ico" />
@@ -16,21 +16,83 @@
   </header>
   <main>
     <section class="form-page">
-      <h1>Bireysel Başvuru Yap</h1>
+      <h1>Bireysel Katılımcı Başvuru Formu</h1>
 
-      <label for="name">Adınız Soyadınız
-          <input type="text" id="name" />
+      <h2>Bölüm 1: Kişisel Bilgiler</h2>
+
+      <label for="name">Adınız Soyadınız *
+        <input type="text" id="name" name="name" required />
       </label>
 
-      <label for="email">E-posta Adresiniz
-          <input type="email" id="email" />
+      <label for="birthdate">Doğum Tarihiniz *
+        <input type="date" id="birthdate" name="birthdate" required />
+        <small>Not: 18-30 yaş aralığındaki gençler veya 18 yaş üstü kadın adaylar önceliklidir.</small>
       </label>
 
-      <label for="phone">Telefon Numaranız
-          <input type="text" id="phone" />
+      <label>Cinsiyetiniz
+        <span class="radio-group">
+          <label><input type="radio" name="gender" value="kadin" /> Kadın</label>
+          <label><input type="radio" name="gender" value="erkek" /> Erkek</label>
+        </span>
       </label>
 
-      <button>Başvur</button>
+      <label>Engel Durumunuz Var mı?
+        <span class="radio-group">
+          <label><input type="radio" name="disability" value="evet" /> Evet</label>
+          <label><input type="radio" name="disability" value="hayir" /> Hayır</label>
+        </span>
+        <small>Bilgi: Projeye engelli bireylerin katılımında yaş veya cinsiyet şartı aranmamaktadır.</small>
+      </label>
+
+      <label for="email">E-Posta Adresiniz *
+        <input type="email" id="email" name="email" required />
+      </label>
+
+      <label for="phone">Cep Telefonu Numaranız *
+        <input type="tel" id="phone" name="phone" required />
+      </label>
+
+      <h2>Bölüm 2: Uygunluk Kriterleri</h2>
+
+      <label>Eğitim Durumunuz *
+        <span class="radio-group">
+          <label><input type="radio" name="education" value="lise" required /> Lise</label>
+          <label><input type="radio" name="education" value="onlisans" /> Ön Lisans</label>
+          <label><input type="radio" name="education" value="lisans" /> Lisans</label>
+          <label><input type="radio" name="education" value="yukseklisans" /> Yüksek Lisans/Doktora</label>
+        </span>
+        <small>Uyarı: Programa katılmak için en az lise mezunu olmanız gerekmektedir.</small>
+      </label>
+
+      <label>Şu an herhangi bir kurumda sigortalı olarak çalışıyor musunuz? *
+        <span class="radio-group">
+          <label><input type="radio" name="employed" value="evet" required /> Evet</label>
+          <label><input type="radio" name="employed" value="hayir" /> Hayır</label>
+        </span>
+      </label>
+
+      <label>İkamet Ettiğiniz İl *
+        <span class="radio-group">
+          <label><input type="radio" name="city" value="adiyaman" required /> Adıyaman</label>
+          <label><input type="radio" name="city" value="hatay" /> Hatay</label>
+          <label><input type="radio" name="city" value="kahramanmaras" /> Kahramanmaraş</label>
+          <label><input type="radio" name="city" value="malatya" /> Malatya</label>
+        </span>
+      </label>
+
+      <h2>Bölüm 3: Açık Rıza ve Onay</h2>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="kvkk" required />
+        <span><b>Aydınlatma Metni:</b> KVKK kapsamında kişisel verilerimin işlenmesini kabul ediyorum.</span>
+      </label>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="declaration" required />
+        <span><b>Taahhüt:</b> Verdiğim bilgilerin doğruluğunu beyan ederim.</span>
+      </label>
+
+      <button type="submit">Başvurumu Gönder</button>
     </section>
   </main>
   <footer>
@@ -40,6 +102,12 @@
           <h1>Dijital Usta</h1>
           <p>Gençleri e-ticaretle buluşturup<br/>KOBİ'lere yetkin iş gücü kazandırmayı amaçlar.</p>
         </span>
+        <div class="footer-logos">
+          <img src="./s/ticaret.png" alt="T.C. Ticaret Bakanlığı" />
+          <img src="./s/tobb.png" alt="TOBB" />
+          <img src="./s/trendyol.png" alt="Trendyol" />
+          <img src="./s/musiad.png" alt="MÜSİAD" />
+        </div>
       </div>
     </div>
     <div class="footer-bottom">

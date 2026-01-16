@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KOBİ Başvusurusu Yap | Yanınızdayız | Dijital Usta</title>
+  <title>KOBİ ve Esnaf Başvuru Formu | Dijital Usta - Yanınızdayız</title>
   <link rel="preconnect" href="https://api.dijitalusta.net" />
   <link rel="stylesheet" href="./s/site.css?v=1" />
 <link rel="icon" type="image/x-icon" href="./s/favicon.ico" />
@@ -16,34 +16,90 @@
   </header>
   <main>
     <section class="form-page">
-      <h1>KOBİ Başvurusu Yap</h1>
+      <h1>KOBİ ve Esnaf Başvuru Formu</h1>
 
-      <label for="name">Adınız Soyadınız
-          <input type="text" id="name" />
+      <h2>Bölüm 1: İşletme Kimlik Bilgileri</h2>
+
+      <label for="companyName">İşletme Unvanı (Tam Ticari Unvan)
+        <input type="text" id="companyName" name="companyName" />
       </label>
 
-      <label for="companyName">Firma Adınız
-          <input type="text" id="companyName" />
+      <label for="name">Yetkili Adı Soyadı *
+        <input type="text" id="name" name="name" required />
       </label>
 
-      <label for="email">E-posta Adresiniz
-          <input type="email" id="email" />
+      <label for="email">Yetkili E-Posta Adresi *
+        <input type="email" id="email" name="email" required />
       </label>
 
-      <label for="phone">Telefon Numaranız
-          <input type="text" id="phone" />
+      <label for="phone">Yetkili Telefon Numarası *
+        <input type="tel" id="phone" name="phone" required />
       </label>
 
-      <button>Başvur</button>
+      <label>İşletmenizin Kayıtlı Olduğu İl (Vergi Levhası Esaslı) *
+        <span class="radio-group">
+          <label><input type="radio" name="city" value="adiyaman" required /> Adıyaman</label>
+          <label><input type="radio" name="city" value="hatay" /> Hatay</label>
+          <label><input type="radio" name="city" value="kahramanmaras" /> Kahramanmaraş</label>
+          <label><input type="radio" name="city" value="malatya" /> Malatya</label>
+          <label><input type="radio" name="city" value="diger" /> Diğer</label>
+        </span>
+      </label>
+
+      <label>İşletmenizin Faaliyet Süresi (Kaç yıldır hizmet veriyorsunuz?) *
+        <span class="radio-group">
+          <label><input type="radio" name="experience" value="0-2" required /> 0-2 Yıl</label>
+          <label><input type="radio" name="experience" value="2-3" /> 2-3 Yıl</label>
+          <label><input type="radio" name="experience" value="3+" /> 3 Yıl ve Üzeri</label>
+        </span>
+      </label>
+
+      <h2>Bölüm 2: Ticari ve Operasyonel Durum</h2>
+
+      <label for="revenue">Yıllık Cironuz (Tahmini TL)
+        <input type="text" id="revenue" name="revenue" />
+        <small>Bilgi: Destekten yararlanmak için aylık e-ticaret satış hacminizin 100.000 TL'nin altında olması gerekmektedir.</small>
+      </label>
+
+      <label>Trendyol Mağazanız Var mı?
+        <span class="radio-group">
+          <label><input type="radio" name="trendyol" value="evet" id="trendyol-evet" /> Evet</label>
+          <label><input type="radio" name="trendyol" value="hayir" id="trendyol-hayir" /> Hayır</label>
+        </span>
+      </label>
+
+      <label for="trendyolProfile" id="trendyol-profile-label" style="display: none;">Trendyol Satıcı Profili
+        <input type="text" id="trendyolProfile" name="trendyolProfile" />
+      </label>
+
+      <h2>Bölüm 3: Açık Rıza ve Onay</h2>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="kvkk" required />
+        <span><b>Aydınlatma Metni:</b> KVKK kapsamında şirket verilerinin işlenmesini kabul ediyorum.</span>
+      </label>
+
+      <label class="checkbox-label">
+        <input type="checkbox" name="employment" required />
+        <span><b>İstihdam Taahhüdü:</b> Proje kapsamında eğitim alan 1 kişiyi, kriterleri sağlamam durumunda 12 ay süreyle istihdam etmeyi değerlendireceğimi biliyorum.</span>
+      </label>
+
+      <button type="submit">İşletme Başvurusunu Tamamla</button>
     </section>
   </main>
-  <footer>
+ <footer>
     <div class="footer-main">
       <div class="footer-content">
         <span>
           <h1>Dijital Usta</h1>
           <p>Gençleri e-ticaretle buluşturup<br/>KOBİ'lere yetkin iş gücü kazandırmayı amaçlar.</p>
         </span>
+        <div class="footer-logos">
+          <img src="./s/ticaret.png" alt="T.C. Ticaret Bakanlığı" />
+          <img src="./s/tobb.png" alt="TOBB" />
+          <img src="./s/trendyol.png" alt="Trendyol" />
+          <img src="./s/musiad.png" alt="MÜSİAD" />
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -55,6 +111,22 @@
   </footer>
   <script src="./s/site.js?v=1" defer></script>
   <script src="./s/code/pages/index.js?v=1" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const trendyolRadios = document.querySelectorAll('input[name="trendyol"]');
+      const profileLabel = document.getElementById('trendyol-profile-label');
+
+      trendyolRadios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          if (this.value === 'evet') {
+            profileLabel.style.display = 'block';
+          } else {
+            profileLabel.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
