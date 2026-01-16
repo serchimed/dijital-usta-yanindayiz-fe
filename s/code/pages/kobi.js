@@ -1,5 +1,6 @@
 // KOBİ formu - zorunlu alanlar ve hata mesajları
 const fields = {
+    companyName: { type: 'text',    message: 'İşletme unvanı zorunludur' },
     name:       { type: 'text',     message: 'Yetkili adı soyadı zorunludur' },
     email:      { type: 'text',     message: 'E-posta adresi zorunludur', validate: checkEmail, invalidMessage: 'Geçerli bir e-posta adresi giriniz' },
     phone:      { type: 'text',     message: 'Telefon numarası zorunludur', validate: checkPhone, invalidMessage: 'Geçerli bir telefon numarası giriniz (0 ile başlayan 11 haneli, örn: 05556667788)' },
@@ -117,7 +118,14 @@ function collectFormData() {
 
     // Text inputlar
     document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"]').forEach(input => {
-        if (input.name) data[input.name] = input.value.trim();
+        if (input.name) {
+            let value = input.value.trim();
+            // Ciro alanındaki binlik ayracı kaldır
+            if (input.name === 'revenue') {
+                value = parseThousands(value);
+            }
+            data[input.name] = value;
+        }
     });
 
     // Radio grupları
@@ -159,6 +167,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Yıllık ciro binlik ayraç formatlaması
+    const revenueInput = document.querySelector('input[name="revenue"]');
+    if (revenueInput) {
+        revenueInput.addEventListener('input', function() {
+            const cursorPos = this.selectionStart;
+            const oldLength = this.value.length;
+            this.value = formatThousands(this.value);
+            const newLength = this.value.length;
+            // İmleç pozisyonunu ayarla
+            const posDiff = newLength - oldLength;
+            this.setSelectionRange(cursorPos + posDiff, cursorPos + posDiff);
+        });
+    }
 
     // Hata temizleme event listener'ları
     for (const [name, field] of Object.entries(fields)) {

@@ -29,11 +29,25 @@ function checkUrl(url) {
 
 function checkNumber(value) {
     if (!value || typeof value !== "string") return false;
-    for (let i = 0; i < value.length; i++) {
-        let charCode = value.charCodeAt(i);
+    // Binlik ayraçları (nokta) kaldır
+    const cleanValue = value.replace(/\./g, '');
+    for (let i = 0; i < cleanValue.length; i++) {
+        let charCode = cleanValue.charCodeAt(i);
         if (charCode < 48 || charCode > 57) return false;
     }
     return true;
+}
+
+function formatThousands(value) {
+    // Sadece rakamları al
+    const digits = value.replace(/\D/g, '');
+    // Binlik ayraç ekle (Türk formatı: nokta)
+    return digits.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function parseThousands(value) {
+    // Binlik ayraçları kaldır
+    return value.replace(/\./g, '');
 }
 
 function checkMinAge(minAge) {

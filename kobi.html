@@ -18,8 +18,8 @@
 
       <h2>Bölüm 1: İşletme Kimlik Bilgileri</h2>
 
-      <label for="companyName">İşletme Unvanı (Tam Ticari Unvan)
-        <input type="text" id="companyName" name="companyName" />
+      <label for="companyName">İşletme Unvanı (Tam Ticari Unvan) *
+        <input type="text" id="companyName" name="companyName" required />
       </label>
 
       <label for="name">Yetkili Adı Soyadı *
@@ -54,14 +54,14 @@
 
       <h2>Bölüm 2: Ticari ve Operasyonel Durum</h2>
 
-      <label for="revenue">Yıllık Cironuz (Tahmini TL)
-        <input type="text" id="revenue" name="revenue" />
+      <label for="revenue">Yıllık Cironuz (Tahmini TL) *
+        <input type="text" id="revenue" name="revenue" required />
         <small>Bilgi: Destekten yararlanmak için aylık e-ticaret satış hacminizin 100.000 TL'nin altında olması gerekmektedir.</small>
       </label>
 
-      <label>Trendyol Mağazanız Var mı?
+      <label>Trendyol Mağazanız Var mı? *
         <span class="radio-group">
-          <label><input type="radio" name="trendyol" value="evet" id="trendyol-evet" /> Evet</label>
+          <label><input type="radio" name="trendyol" value="evet" id="trendyol-evet" required /> Evet</label>
           <label><input type="radio" name="trendyol" value="hayir" id="trendyol-hayir" /> Hayır</label>
         </span>
       </label>
@@ -99,7 +99,7 @@
     </div>
     <div class="footer-bottom">
       <div class="footer-content">
-        <span>© 2025 <a href="https://dijitalusta.net">Dijital Usta</a> | Tüm Haklar Saklıdır.</span>
+        <span>© 2026 <a href="https://dijitalusta.net">Dijital Usta</a> | Tüm Haklar Saklıdır.</span>
         <a href="https://panel.dijitalusta.net/concent.html">KVKK Aydınlatma Metni ve Açık Rıza Formu</a>
       </div>
     </div>
