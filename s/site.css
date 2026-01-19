@@ -239,7 +239,7 @@ section {
     margin: 0 auto;
 }
 
-main section:first-child:not(.form-page) {
+main section:first-child:not(.form-page):not(.centered) {
     background-color: #FE5200;
     color: #fff;
     text-align: center;
@@ -247,7 +247,7 @@ main section:first-child:not(.form-page) {
     max-width: 100%;
 }
 
-main section:first-child:not(.form-page) h1 {
+main section:first-child:not(.form-page):not(.centered) h1 {
     color: #fff;
     font-size: 42px;
     line-height: 1.2;
@@ -255,7 +255,7 @@ main section:first-child:not(.form-page) h1 {
     font-weight: 700;
 }
 
-main section:first-child:not(.form-page) p {
+main section:first-child:not(.form-page):not(.centered) p {
     font-size: 21px;
     line-height: 1.6;
     margin: 0 auto;
@@ -566,11 +566,11 @@ select.error {
         align-self: center;
     }
 
-    main section:first-child:not(.form-page) h1 {
+    main section:first-child:not(.form-page):not(.centered) h1 {
         font-size: 32px;
     }
 
-    main section:first-child:not(.form-page) p {
+    main section:first-child:not(.form-page):not(.centered) p {
         font-size: 18px;
     }
 
