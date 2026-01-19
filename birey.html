@@ -5,8 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bireysel Katılımcı Başvuru Formu | Dijital Usta - Yanınızdayız</title>
-  <link rel="preconnect" href="https://yaninizdayizapi.dijitalusta.net" />
-  <link rel="stylesheet" href="./s/site.css?v=2" />
+  <link rel="preconnect" href="https://api.yaninizdayiz.dijitalusta.net" />
+  <link rel="preload" href="./s/PublicSans-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="./s/site.css?v=5" />
 <link rel="icon" type="image/x-icon" href="./s/favicon.ico" />
 </head>
 
@@ -19,7 +20,7 @@
       <h2>Bölüm 1: Kişisel Bilgiler</h2>
 
       <label for="name">Adınız Soyadınız *
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" maxlength="100" required />
       </label>
 
       <label for="birthdate">Doğum Tarihiniz *
@@ -43,11 +44,11 @@
       </label>
 
       <label for="email">E-Posta Adresiniz *
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" maxlength="100" required />
       </label>
 
       <label for="phone">Cep Telefonu Numaranız *
-        <input type="tel" id="phone" name="phone" required />
+        <input type="tel" id="phone" name="phone" maxlength="11" required />
       </label>
 
       <h2>Bölüm 2: Uygunluk Kriterleri</h2>
@@ -90,6 +91,8 @@
         <span><b>Taahhüt:</b> Verdiğim bilgilerin doğruluğunu beyan ederim.</span>
       </label>
 
+      <input type="text" name="_hp_field" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
       <button type="submit">Başvurumu Gönder</button>
     </section>
   </main>
@@ -112,9 +115,8 @@
       </div>
     </div>
   </footer>
-  <script src="./s/site.js?v=1" defer></script>
-  <script src="./s/code/helper.js?v=1" defer></script>
-  <script src="./s/code/pages/birey.js?v=1" defer></script>
+  <script src="./s/site.js?v=5" defer></script>
+  <script src="./s/code/pages/birey.js?v=5" defer></script>
 </body>
 
 </html>

@@ -5,8 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KOBİ ve Esnaf Başvuru Formu | Dijital Usta - Yanınızdayız</title>
-  <link rel="preconnect" href="https://yaninizdayizapi.dijitalusta.net" />
-  <link rel="stylesheet" href="./s/site.css?v=2" />
+  <link rel="preconnect" href="https://api.yaninizdayiz.dijitalusta.net" />
+  <link rel="preload" href="./s/PublicSans-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="stylesheet" href="./s/site.css?v=5" />
 <link rel="icon" type="image/x-icon" href="./s/favicon.ico" />
 </head>
 
@@ -19,19 +20,19 @@
       <h2>Bölüm 1: İşletme Kimlik Bilgileri</h2>
 
       <label for="companyName">İşletme Unvanı (Tam Ticari Unvan) *
-        <input type="text" id="companyName" name="companyName" required />
+        <input type="text" id="companyName" name="companyName" maxlength="200" required />
       </label>
 
       <label for="name">Yetkili Adı Soyadı *
-        <input type="text" id="name" name="name" required />
+        <input type="text" id="name" name="name" maxlength="100" required />
       </label>
 
       <label for="email">Yetkili E-Posta Adresi *
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" maxlength="100" required />
       </label>
 
       <label for="phone">Yetkili Telefon Numarası *
-        <input type="tel" id="phone" name="phone" required />
+        <input type="tel" id="phone" name="phone" maxlength="11" required />
       </label>
 
       <label>İşletmenizin Kayıtlı Olduğu İl (Vergi Levhası Esaslı) *
@@ -40,7 +41,6 @@
           <label><input type="radio" name="city" value="hatay" /> Hatay</label>
           <label><input type="radio" name="city" value="kahramanmaras" /> Kahramanmaraş</label>
           <label><input type="radio" name="city" value="malatya" /> Malatya</label>
-          <label><input type="radio" name="city" value="diger" /> Diğer</label>
         </span>
       </label>
 
@@ -55,7 +55,7 @@
       <h2>Bölüm 2: Ticari ve Operasyonel Durum</h2>
 
       <label for="revenue">Yıllık Cironuz (Tahmini TL) *
-        <input type="text" id="revenue" name="revenue" required />
+        <input type="text" id="revenue" name="revenue" maxlength="20" required />
         <small>Bilgi: Destekten yararlanmak için aylık e-ticaret satış hacminizin 100.000 TL'nin altında olması gerekmektedir.</small>
       </label>
 
@@ -67,7 +67,7 @@
       </label>
 
       <label for="trendyolProfile" id="trendyol-profile-label" class="hidden">Trendyol Satıcı Profili
-        <input type="text" id="trendyolProfile" name="trendyolProfile" />
+        <input type="text" id="trendyolProfile" name="trendyolProfile" maxlength="200" />
       </label>
 
       <h2>Bölüm 3: Açık Rıza ve Onay</h2>
@@ -81,6 +81,8 @@
         <input type="checkbox" name="employment" required />
         <span><b>İstihdam Taahhüdü:</b> Proje kapsamında eğitim alan 1 kişiyi, kriterleri sağlamam durumunda 12 ay süreyle istihdam etmeyi değerlendireceğimi biliyorum.</span>
       </label>
+
+      <input type="text" name="_hp_field" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
       <button type="submit">İşletme Başvurusunu Tamamla</button>
     </section>
@@ -104,9 +106,8 @@
       </div>
     </div>
   </footer>
-  <script src="./s/site.js?v=1" defer></script>
-  <script src="./s/code/helper.js?v=1" defer></script>
-  <script src="./s/code/pages/kobi.js?v=1" defer></script>
+  <script src="./s/site.js?v=5" defer></script>
+  <script src="./s/code/pages/kobi.js?v=5" defer></script>
 </body>
 
 </html>

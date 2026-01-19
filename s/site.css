@@ -530,6 +530,14 @@ ul.cities li::before {
     display: none;
 }
 
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
 input.error,
 textarea.error,
 select.error {

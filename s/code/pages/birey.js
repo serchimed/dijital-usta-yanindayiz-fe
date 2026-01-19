@@ -1,4 +1,3 @@
-// Birey formu - zorunlu alanlar ve hata mesajları
 const fields = {
     name:        { type: 'text',     message: 'Adınız Soyadınız zorunludur' },
     birthdate:   { type: 'text',     message: 'Doğum tarihi zorunludur', validate: checkMinAge(18), invalidMessage: 'Başvuru için en az 18 yaşında olmalısınız' },
@@ -11,105 +10,18 @@ const fields = {
     declaration: { type: 'checkbox', message: 'Taahhüt onayı zorunludur' }
 };
 
-function clearErrors() {
-    document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
-    document.querySelectorAll('.error-message').forEach(el => el.remove());
-}
-
-function clearFieldError(element, type) {
-    element.classList.remove('error');
-    let errorMsg = null;
-
-    if (type === 'radio') {
-        const radioGroup = element.closest('.radio-group');
-        errorMsg = radioGroup.nextElementSibling;
-    } else if (type === 'checkbox') {
-        const checkboxLabel = element.closest('.checkbox-label');
-        errorMsg = checkboxLabel.nextElementSibling;
-    } else {
-        errorMsg = element.nextElementSibling;
-    }
-
-    if (errorMsg && errorMsg.classList.contains('error-message')) {
-        errorMsg.remove();
-    }
-}
-
-function showError(element, message, type) {
-    element.classList.add('error');
-    const errorSpan = document.createElement('span');
-    errorSpan.className = 'error-message';
-    errorSpan.textContent = message;
-
-    if (type === 'radio') {
-        const radioGroup = element.closest('.radio-group');
-        radioGroup.insertAdjacentElement('afterend', errorSpan);
-    } else if (type === 'checkbox') {
-        const checkboxLabel = element.closest('.checkbox-label');
-        checkboxLabel.insertAdjacentElement('afterend', errorSpan);
-    } else {
-        element.insertAdjacentElement('afterend', errorSpan);
-    }
-}
-
-function validate() {
-    clearErrors();
-    let firstError = null;
-    const errors = [];
-
-    for (const [name, field] of Object.entries(fields)) {
-        let isValid = true;
-        let element = null;
-
-        if (field.type === 'text') {
-            element = document.querySelector(`input[name="${name}"]`);
-            const value = element ? element.value.trim() : '';
-
-            if (value === '') {
-                isValid = false;
-            } else if (field.validate && !field.validate(value)) {
-                isValid = false;
-                field._useInvalidMessage = true;
-            }
-        } else if (field.type === 'radio') {
-            element = document.querySelector(`input[name="${name}"]`);
-            isValid = document.querySelector(`input[name="${name}"]:checked`) !== null;
-        } else if (field.type === 'checkbox') {
-            element = document.querySelector(`input[name="${name}"]`);
-            isValid = element && element.checked;
-        }
-
-        if (!isValid && element) {
-            const msg = field._useInvalidMessage ? field.invalidMessage : field.message;
-            field._useInvalidMessage = false;
-            showError(element, msg, field.type);
-            errors.push(msg);
-            if (!firstError) firstError = element;
-        }
-    }
-
-    if (firstError) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    return { isValid: errors.length === 0, errors };
-}
-
 function collectFormData() {
     const data = {};
 
-    // Text inputlar
     document.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"]').forEach(input => {
         if (input.name) data[input.name] = input.value.trim();
     });
 
-    // Radio grupları
     ['gender', 'disability', 'education', 'employed', 'city'].forEach(name => {
         const selected = document.querySelector(`input[name="${name}"]:checked`);
         data[name] = selected ? selected.value : null;
     });
 
-    // Checkbox'lar
     document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
         if (cb.name) data[cb.name] = cb.checked;
     });
@@ -117,40 +29,50 @@ function collectFormData() {
     return data;
 }
 
-function submitForm() {
-    const result = validate();
-
-    if (!result.isValid) {
-        return null;
-    }
-
-    return collectFormData();
-}
-
-// Form submit handler
 document.addEventListener('DOMContentLoaded', function() {
-    // Hata temizleme event listener'ları
-    for (const [name, field] of Object.entries(fields)) {
-        const elements = document.querySelectorAll(`input[name="${name}"]`);
-        elements.forEach(el => {
-            const eventType = field.type === 'text' ? 'input' : 'change';
-            el.addEventListener(eventType, () => clearFieldError(el, field.type));
-        });
-    }
+    setupFieldListeners(fields);
 
-    // Form submit
     const submitBtn = document.querySelector('button[type="submit"]');
 
     if (submitBtn) {
+        let $msg = document.createElement("p");
+        $msg.className = "form-message";
+        submitBtn.after($msg);
+
         submitBtn.addEventListener('click', function(e) {
             e.preventDefault();
 
-            const response = submitForm();
+            const result = validateFields(fields);
 
-            if (response) {
-                console.log('Form JSON:', JSON.stringify(response, null, 2));
-                // TODO: API gönderimi
-                alert('Başvurunuz alındı!');
+            if (result.isValid) {
+                const formData = collectFormData();
+                const honeypotValue = document.querySelector('input[name="_hp_field"]')?.value || '';
+
+                apiBtn(
+                    submitBtn,
+                    'Individual/Add',
+                    {
+                        FullName: formData.name,
+                        BirthDate: formData.birthdate,
+                        Gender: formData.gender || '',
+                        HasDisability: formData.disability === 'evet',
+                        Email: formData.email,
+                        Phone: formData.phone,
+                        EducationLevel: formData.education,
+                        IsEmployed: formData.employed === 'evet',
+                        Province: formData.city,
+                        KvkkConsent: formData.kvkk,
+                        Declaration: formData.declaration,
+                        _hp_field: honeypotValue
+                    },
+                    'Başvurunuz başarıyla alındı.',
+                    null,
+                    './tesekkurler.html',
+                    $msg
+                );
+            } else {
+                $msg.textContent = "Lütfen formdaki hataları düzeltiniz.";
+                $msg.className = "form-message error";
             }
         });
     }
