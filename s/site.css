@@ -243,7 +243,7 @@ section {
     margin: 0 auto;
 }
 
-main section:first-child:not(.form-page):not(.centered) {
+main section:first-child:not(.form-page):not(.centered), .orange {
     background-color: #FE5200;
     color: #fff;
     text-align: center;
