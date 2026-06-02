@@ -304,8 +304,23 @@ section.form-page small {
     background-color: #FE5200!important;
 }
 
-.orange h2 {
-    color: #fff, im !important;
+.orange h2, h3 {
+    color: #fff!important;
+}
+
+.orange ul li {
+    list-style:none!important;
+}
+
+.orange a {
+    background: #000;
+    padding: 1rem;
+    color: #fff;
+    margin: 1rem;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 .radio-group {
