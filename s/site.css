@@ -58,6 +58,7 @@ header {
 header img {
     width: 350px;
     max-width: 100%;
+    margin:-5rem;
 }
 
 header.left {
@@ -302,6 +303,7 @@ section.form-page small {
 
 .orange {
     background-color: #FE5200!important;
+    text-align:center;
 }
 
 .orange h2, h3 {
