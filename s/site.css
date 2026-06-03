@@ -64,6 +64,11 @@ header.left {
     justify-content: flex-start;
 }
 
+header.left img {
+    margin-block: -5rem;
+    margin-left: -2rem;
+}
+
 header h1 {
     color: #000;
     font-size: 28px;
