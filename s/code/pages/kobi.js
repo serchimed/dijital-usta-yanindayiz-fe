@@ -7,8 +7,7 @@ const fields = {
     experience: { type: 'radio',    message: 'Faaliyet süresi seçiniz' },
     revenue:    { type: 'text',     message: 'Yıllık ciro zorunludur', validate: checkNumber, invalidMessage: 'Yıllık ciro sadece rakam içermelidir' },
     trendyol:   { type: 'radio',    message: 'Trendyol mağaza durumu seçiniz' },
-    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' },
-    kobiId:     { type: 'text' }
+    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' }
 };
 
 function validateKobi() {
@@ -128,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         TrendyolStoreUrl: formData.trendyolProfile || '',
                         KvkkConsent: formData.kvkk,
                         EmploymentCommitment: true,
-                        KobiId: formData.kobiId,
                         _hp_field: honeypotValue
                     },
                     'Başvurunuz başarıyla alındı.',
