@@ -7,8 +7,7 @@ const fields = {
     experience: { type: 'radio',    message: 'Faaliyet süresi seçiniz' },
     revenue:    { type: 'text',     message: 'Yıllık ciro zorunludur', validate: checkNumber, invalidMessage: 'Yıllık ciro sadece rakam içermelidir' },
     trendyol:   { type: 'radio',    message: 'Trendyol mağaza durumu seçiniz' },
-    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' },
-    employment: { type: 'checkbox', message: 'İstihdam taahhüdü zorunludur' }
+    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' }
 };
 
 function validateKobi() {
