@@ -7,35 +7,12 @@ const fields = {
     experience: { type: 'radio',    message: 'Faaliyet süresi seçiniz' },
     revenue:    { type: 'text',     message: 'Yıllık ciro zorunludur', validate: checkNumber, invalidMessage: 'Yıllık ciro sadece rakam içermelidir' },
     trendyol:   { type: 'radio',    message: 'Trendyol mağaza durumu seçiniz' },
-    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' }
+    kvkk:       { type: 'checkbox', message: 'KVKK onayı zorunludur' },
+    employment: { type: 'checkbox', message: 'İstihdam taahhüdü zorunludur' }
 };
 
 function validateKobi() {
-    const result = validateFields(fields);
-    const errors = [...result.errors];
-    let firstError = result.isValid ? null : document.querySelector('.error');
-
-    const trendyolSelected = document.querySelector('input[name="trendyol"]:checked');
-    if (trendyolSelected && trendyolSelected.value === 'evet') {
-        const profileInput = document.querySelector('input[name="trendyolProfile"]');
-        const profileValue = profileInput ? profileInput.value.trim() : '';
-
-        if (profileValue === '') {
-            showError(profileInput, 'Trendyol satıcı profili zorunludur', 'text');
-            errors.push('Trendyol satıcı profili zorunludur');
-            if (!firstError) firstError = profileInput;
-        } else if (!checkUrl(profileValue)) {
-            showError(profileInput, 'Geçerli bir web sitesi URL\'si giriniz (https:// ile başlamalı)', 'text');
-            errors.push('Geçerli bir web sitesi URL\'si giriniz');
-            if (!firstError) firstError = profileInput;
-        }
-    }
-
-    if (firstError && !result.isValid === false) {
-        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    return { isValid: errors.length === 0, errors };
+    return validateFields(fields);
 }
 
 function collectFormData() {
@@ -64,19 +41,6 @@ function collectFormData() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const trendyolRadios = document.querySelectorAll('input[name="trendyol"]');
-    const profileLabel = document.getElementById('trendyol-profile-label');
-
-    trendyolRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-            if (this.value === 'evet') {
-                profileLabel.classList.remove('hidden');
-            } else {
-                profileLabel.classList.add('hidden');
-            }
-        });
-    });
-
     const revenueInput = document.querySelector('input[name="revenue"]');
     if (revenueInput) {
         revenueInput.addEventListener('input', function() {
@@ -90,11 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     setupFieldListeners(fields);
-
-    const profileInput = document.querySelector('input[name="trendyolProfile"]');
-    if (profileInput) {
-        profileInput.addEventListener('input', () => clearFieldError(profileInput, 'text'));
-    }
 
     const submitBtn = document.querySelector('button[type="submit"]');
 
@@ -124,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         YearsInOperation: formData.experience,
                         AnnualRevenue: formData.revenue,
                         HasTrendyolStore: formData.trendyol === 'evet',
-                        TrendyolStoreUrl: formData.trendyolProfile || '',
+                        TrendyolStoreUrl: formData.kobiNo || '',
                         KvkkConsent: formData.kvkk,
-                        EmploymentCommitment: true,
+                        EmploymentCommitment: formData.employment,
                         _hp_field: honeypotValue
                     },
                     'Başvurunuz başarıyla alındı.',
